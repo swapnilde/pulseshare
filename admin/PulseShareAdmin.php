@@ -145,8 +145,8 @@ class PulseShareAdmin {
 				'pulseshare_options' => array(
 					'client_id'     => Helper::check_pulseshareapi_keys_empty() ? '' : get_option( 'pulseshare_options' )['pulseshare_client_id'],
 					'client_secret' => Helper::check_pulseshareapi_keys_empty() ? '' : get_option( 'pulseshare_options' )['pulseshare_client_secret'],
-					'show_id'       => get_option( 'pulseshare_options' )['pulseshare_show_id'],
-					'album_id'      => get_option( 'pulseshare_options' )['pulseshare_album_id'],
+					'show_id'       => get_option( 'pulseshare_options' )['pulseshare_show_id'] ?? '',
+					'album_id'      => get_option( 'pulseshare_options' )['pulseshare_album_id'] ?? '',
 				),
 			)
 		);
