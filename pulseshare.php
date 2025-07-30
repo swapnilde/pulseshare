@@ -17,8 +17,8 @@
  * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
  * Text Domain:       pulseshare
  * Domain Path:       /languages
- * Elementor tested up to: 3.21.1
- * Elementor Pro tested up to: 3.21.0
+ * Elementor tested up to: 3.30.3
+ * Elementor Pro tested up to: 3.30.1
  */
 
 use PulseShare\Classes\PulseShare;

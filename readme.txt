@@ -2,10 +2,10 @@
 Contributors: swapnilde  
 Donate link: https://paypal.me/SwapnilDeshpandeIN  
 Tags: spotify, podcast, album, embed, audio, video player, wordpress, elementor  
-Requires at least: 4.4  
-Tested up to: 6.5.2  
+Requires at least: 6.6
+Tested up to: 6.8.2
 Stable tag: 1.0.1  
-Requires PHP: 7.2  
+Requires PHP: 8.0
 License: GPLv2 or later  
 License URI: https://www.gnu.org/licenses/gpl-2.0.html  
 
