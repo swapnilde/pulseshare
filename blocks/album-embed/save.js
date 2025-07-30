@@ -28,7 +28,7 @@ export default function albumEmbedSave( props ) {
 							width={ width ? width : '100%' }
 							height={ height ? height : '200' }
 							src={
-								'https://open..com/embed/track/' +
+								'https://open.spotify.com/embed/track/' +
 								currentTrack.id
 							}
 						></iframe>
@@ -46,7 +46,7 @@ export default function albumEmbedSave( props ) {
 							width={ width ? width : '100%' }
 							height={ height ? height : '380' }
 							src={
-								'https://open..com/embed/album/' +
+								'https://open.spotify.com/embed/album/' +
 								PulseShareAdminVars.pulseshare_options.album_id
 							}
 						></iframe>
