@@ -132,6 +132,8 @@ class PulseShareAdmin {
 			)
 		);
 
+		$pulseshare_options = get_option( 'pulseshare_options' );
+
 		wp_localize_script(
 			$this->plugin_name,
 			'PulseShareAdminVars',
@@ -140,13 +142,10 @@ class PulseShareAdmin {
 				'site_url'           => esc_url_raw( get_site_url() ),
 				'ajax_url'           => admin_url( 'admin-ajax.php' ),
 				'rest_url'           => esc_url_raw( get_rest_url() ),
-				'user'               => wp_get_current_user(),
-				'user_avatar'        => get_avatar_url( wp_get_current_user()->ID ),
+				'rest_nonce'         => wp_create_nonce( 'wp_rest' ),
 				'pulseshare_options' => array(
-					'client_id'     => Helper::check_pulseshareapi_keys_empty() ? '' : get_option( 'pulseshare_options' )['pulseshare_client_id'],
-					'client_secret' => Helper::check_pulseshareapi_keys_empty() ? '' : get_option( 'pulseshare_options' )['pulseshare_client_secret'],
-					'show_id'       => get_option( 'pulseshare_options' )['pulseshare_show_id'] ?? '',
-					'album_id'      => get_option( 'pulseshare_options' )['pulseshare_album_id'] ?? '',
+					'show_id'  => $pulseshare_options['pulseshare_show_id'] ?? '',
+					'album_id' => $pulseshare_options['pulseshare_album_id'] ?? '',
 				),
 			)
 		);
