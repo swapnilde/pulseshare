@@ -7,7 +7,7 @@
  * @package    PulseShare
  */
 
-namespace PulseShare\includes;
+namespace PulseShare\Includes;
 
 // If this file is called directly, abort.
 if ( ! defined( 'WPINC' ) ) {

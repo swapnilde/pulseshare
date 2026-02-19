@@ -20,7 +20,7 @@ use PulseShare\Classes\PulseShareLoader;
 use PulseShare\Classes\PulseShareI18n;
 use PulseShare\Admin\PulseShareAdmin;
 use PulseShare\Includes\Options\OptionsPanel;
-use PulseShare\includes\Helper;
+use PulseShare\Includes\Helper;
 use PulseShare\Classes\PulseShareRest;
 
 /**

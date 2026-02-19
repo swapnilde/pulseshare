@@ -20,7 +20,7 @@ use Elementor\Widget_Base;
 use Elementor\Controls_Manager;
 use Elementor\Plugin;
 use Elementor\Utils;
-use PulseShare\includes\Helper;
+use PulseShare\Includes\Helper;
 
 /**
  * AlbumWidget

@@ -12,7 +12,7 @@
 
 namespace PulseShare\Classes;
 
-use PulseShare\includes\Helper;
+use PulseShare\Includes\Helper;
 
 // If this file is called directly, abort.
 if ( ! defined( 'WPINC' ) ) {

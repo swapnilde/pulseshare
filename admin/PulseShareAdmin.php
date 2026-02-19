@@ -10,7 +10,7 @@
 namespace PulseShare\Admin;
 
 use PulseShare\Classes\PulseShareLoader;
-use PulseShare\includes\Helper;
+use PulseShare\Includes\Helper;
 use PulseShare\Widgets\AlbumWidget;
 use PulseShare\Widgets\PodcastWidget;
 
