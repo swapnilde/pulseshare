@@ -1,4 +1,4 @@
-# Copyright (C) 2025 PulseShare
+# Copyright (C) 2026 PulseShare
 # This file is distributed under the same license as the PulseShare package.
 msgid ""
 msgstr ""
@@ -6,7 +6,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2025-07-30 14:06+0000\n"
+"POT-Creation-Date: 2026-02-19 13:38+0000\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-KeywordsList: __;_e;_ex:1,2c;_n:1,2;_n_noop:1,2;_nx:1,2,4c;_nx_noop:1,2,3c;_x:1,2c;esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c\n"
 "X-Poedit-SearchPath-0: .\n"
@@ -15,67 +15,99 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. translators: 1: Plugin name 2: Settings page link
-#: admin/PulseShareAdmin.php:169
+#: admin/PulseShareAdmin.php:152
 msgid "%1$sPlease set the Spotify Client ID and Client Secret in the %2$s."
 msgstr ""
 
-#: admin/PulseShareAdmin.php:172
+#: admin/PulseShareAdmin.php:155
 msgid "PulseShare: "
 msgstr ""
 
-#: admin/PulseShareAdmin.php:177
+#: admin/PulseShareAdmin.php:160
 msgid "settings page"
 msgstr ""
 
-#: admin/PulseShareAdmin.php:196
+#: admin/PulseShareAdmin.php:179
 msgid "Spotify For Wordpress"
 msgstr ""
 
 #. translators: 1: Plugin name 2: Elementor
-#: admin/PulseShareAdmin.php:234
+#: admin/PulseShareAdmin.php:217
 msgid "\"%1$s\" requires \"%2$s\" to be installed and activated."
 msgstr ""
 
-#: admin/PulseShareAdmin.php:237, admin/PulseShareAdmin.php:267, admin/PulseShareAdmin.php:292
+#: admin/PulseShareAdmin.php:220, admin/PulseShareAdmin.php:250, admin/PulseShareAdmin.php:275
 msgid "PulseShare"
 msgstr ""
 
-#: admin/PulseShareAdmin.php:241, admin/PulseShareAdmin.php:268
+#: admin/PulseShareAdmin.php:224, admin/PulseShareAdmin.php:251
 msgid "Elementor"
 msgstr ""
 
 #. translators: 1: Plugin name 2: Elementor 3: Required Elementor version
 #. translators: 1: Plugin name 2: PHP 3: Required PHP version
-#: admin/PulseShareAdmin.php:266, admin/PulseShareAdmin.php:291
+#: admin/PulseShareAdmin.php:249, admin/PulseShareAdmin.php:274
 msgid "\"%1$s\" requires \"%2$s\" version %3$s or greater."
 msgstr ""
 
-#: admin/PulseShareAdmin.php:293
+#: admin/PulseShareAdmin.php:276
 msgid "PHP"
 msgstr ""
 
-#: includes/Helper.php:141
+#: classes/PulseShareRest.php:74
+msgid "You do not have permission to access this endpoint."
+msgstr ""
+
+#: classes/PulseShareRest.php:91, classes/PulseShareRest.php:170
+msgid "Spotify API keys are not configured."
+msgstr ""
+
+#: classes/PulseShareRest.php:102
+msgid "Album ID is not configured."
+msgstr ""
+
+#: classes/PulseShareRest.php:112, classes/PulseShareRest.php:191
+msgid "Failed to retrieve Spotify access token."
+msgstr ""
+
+#: classes/PulseShareRest.php:141, classes/PulseShareRest.php:220
+msgid "Invalid response from Spotify API."
+msgstr ""
+
+#: classes/PulseShareRest.php:181
+msgid "Show ID is not configured."
+msgstr ""
+
+#: includes/Helper.php:266
 msgid "API Keys"
 msgstr ""
 
-#: includes/Helper.php:142
+#: includes/Helper.php:267
 msgid "Integrations"
 msgstr ""
 
-#: includes/Helper.php:152
+#: includes/Helper.php:277
 msgid "Client ID"
 msgstr ""
 
-#: includes/Helper.php:158
+#: includes/Helper.php:283
 msgid "Client Secret"
 msgstr ""
 
-#: includes/Helper.php:165
+#: includes/Helper.php:290
 msgid "Podcast Show ID"
 msgstr ""
 
-#: includes/Helper.php:171
+#: includes/Helper.php:296
 msgid "Album ID"
+msgstr ""
+
+#: includes/Helper.php:302
+msgid "Market"
+msgstr ""
+
+#: includes/Helper.php:304
+msgid "ISO 3166-1 alpha-2 country code (e.g. US, GB, IN)."
 msgstr ""
 
 #: widgets/AlbumWidget.php:49
@@ -174,10 +206,10 @@ msgstr ""
 msgid "Please select an episode from the widget settings"
 msgstr ""
 
-#: includes/options/OptionsPanel.php:107
+#: includes/options/OptionsPanel.php:109
 msgid "Options"
 msgstr ""
 
-#: includes/options/OptionsPanel.php:262
+#: includes/options/OptionsPanel.php:272
 msgid "Settings Saved"
 msgstr ""
