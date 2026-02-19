@@ -28,3 +28,9 @@
 if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) {
 	exit;
 }
+
+// Delete plugin options.
+delete_option( 'pulseshare_options' );
+
+// Delete cached access token transient.
+delete_transient( 'pulseshare_access_token' );
