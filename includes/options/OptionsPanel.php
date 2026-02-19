@@ -267,7 +267,7 @@ class OptionsPanel {
 
 		if ( isset( $_GET['settings-updated'] ) ) {    // phpcs:ignore WordPress.Security.NonceVerification
 			add_settings_error(
-				$this->option_name . '_mesages',
+				$this->option_name . '_messages',
 				$this->option_name . '_message',
 				esc_html__( 'Settings Saved', 'pulseshare' ),
 				'updated'
