@@ -309,7 +309,7 @@ class OptionsPanel {
 
 		<style>.wpex-tab-item {
 				display: none;
-				? ></style>
+			}</style>
 
 		<h2 class="nav-tab-wrapper wpex-tabs">
 		<?php
