@@ -279,9 +279,15 @@ class PodcastWidget extends Widget_Base {
 			<?php endif; ?>
 
 			<?php if ( $is_editor && 'single' === $settings['sfwe_podcast_display_type'] && empty( $settings['sfwe_podcast_list'] ) ) : ?>
-				<div class="sfwe-podcast-editor-placeholder elementor-panel-alert elementor-panel-alert-info">
-					<?php esc_html_e( 'Please select an episode from the widget settings', 'pulseshare' ); ?>
-				</div>
+				<?php if ( empty( Helper::get_pulseshareall_episodes() ) ) : ?>
+					<div class="sfwe-podcast-editor-placeholder elementor-panel-alert elementor-panel-alert-warning">
+						<?php esc_html_e( 'Unable to load episodes from Spotify. Please check your API keys and Show ID in the PulseShare settings.', 'pulseshare' ); ?>
+					</div>
+				<?php else : ?>
+					<div class="sfwe-podcast-editor-placeholder elementor-panel-alert elementor-panel-alert-info">
+						<?php esc_html_e( 'Please select an episode from the widget settings', 'pulseshare' ); ?>
+					</div>
+				<?php endif; ?>
 			<?php endif; ?>
 		</div>
 

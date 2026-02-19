@@ -262,9 +262,15 @@ class AlbumWidget extends Widget_Base {
 			<?php endif; ?>
 
 			<?php if ( $is_editor && 'single' === $settings['sfwe_album_display_type'] && empty( $settings['sfwe_album_list'] ) ) : ?>
-				<div class="sfwe-album-editor-placeholder elementor-panel-alert elementor-panel-alert-info">
-					<?php esc_html_e( 'Please select a track from the widget settings.', 'pulseshare' ); ?>
-				</div>
+				<?php if ( empty( Helper::get_pulseshareshow_tracks() ) ) : ?>
+					<div class="sfwe-album-editor-placeholder elementor-panel-alert elementor-panel-alert-warning">
+						<?php esc_html_e( 'Unable to load tracks from Spotify. Please check your API keys and Album ID in the PulseShare settings.', 'pulseshare' ); ?>
+					</div>
+				<?php else : ?>
+					<div class="sfwe-album-editor-placeholder elementor-panel-alert elementor-panel-alert-info">
+						<?php esc_html_e( 'Please select a track from the widget settings.', 'pulseshare' ); ?>
+					</div>
+				<?php endif; ?>
 			<?php endif; ?>
 		</div>
 

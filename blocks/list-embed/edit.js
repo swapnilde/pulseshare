@@ -7,7 +7,7 @@ import {
 	__experimentalUnitControl as UnitControl,
 } from '@wordpress/components';
 import { InspectorControls, useBlockProps } from '@wordpress/block-editor';
-import { useEffect } from '@wordpress/element';
+import { useEffect, useState } from '@wordpress/element';
 import apiFetch from '@wordpress/api-fetch';
 import classnames from 'classnames';
 
@@ -41,13 +41,17 @@ export default function ListEmbedEdit({ attributes, setAttributes, clientId, cla
 	}, [blockID, clientId, setAttributes]);
 
 	// Fetch episodes via the server-side REST API proxy.
+	const [error, setError] = useState(null);
+
 	useEffect(() => {
 		apiFetch({ path: '/pulseshare/v1/episodes' })
 			.then((episodes) => {
 				setAttributes({ episodesArray: episodes });
+				setError(null);
 			})
-			.catch((error) => {
-				console.error('PulseShare: Failed to fetch episodes', error);
+			.catch((err) => {
+				console.error('PulseShare: Failed to fetch episodes', err);
+				setError(err?.message || 'Failed to load episodes from Spotify.');
 			});
 	}, []); // eslint-disable-line react-hooks/exhaustive-deps
 
@@ -87,7 +91,7 @@ export default function ListEmbedEdit({ attributes, setAttributes, clientId, cla
 								)}
 								help="Selected episode will be displayed in the frontend."
 								value={
-									currentEpisode
+									currentEpisode?.id
 										? currentEpisode.id
 										: episodesArray[0]?.id
 								}
@@ -102,7 +106,7 @@ export default function ListEmbedEdit({ attributes, setAttributes, clientId, cla
 								onChange={(id) => {
 									setAttributes({
 										currentEpisode: episodesArray.find(
-											(episode) => episode.id === id
+											(episode) => String(episode.id) === String(id)
 										),
 									});
 								}}
@@ -178,8 +182,13 @@ export default function ListEmbedEdit({ attributes, setAttributes, clientId, cla
 			<div className={classes} id={blockID}>
 				<div className="container">
 					<div className={'sfwe-episode'}>
+						{error && (
+							<div className="notice notice-error alt">
+								<p>{error}</p>
+							</div>
+						)}
 						{displayType === 'single' &&
-							!currentEpisode?.id && (
+							!currentEpisode?.id && !error && (
 								<div className="notice notice-info alt">
 									<p>
 										<i>

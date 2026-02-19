@@ -6,7 +6,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-02-19 13:38+0000\n"
+"POT-Creation-Date: 2026-02-19 16:37+0000\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-KeywordsList: __;_e;_ex:1,2c;_n:1,2;_n_noop:1,2;_nx:1,2,4c;_nx_noop:1,2,3c;_x:1,2c;esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c\n"
 "X-Poedit-SearchPath-0: .\n"
@@ -154,8 +154,12 @@ msgstr ""
 msgid "Width"
 msgstr ""
 
-#: widgets/AlbumWidget.php:266
+#: widgets/AlbumWidget.php:271
 msgid "Please select a track from the widget settings."
+msgstr ""
+
+#: widgets/AlbumWidget.php:267
+msgid "Unable to load tracks from Spotify. Please check your API keys and Album ID in the PulseShare settings."
 msgstr ""
 
 #: widgets/PodcastWidget.php:49
@@ -202,8 +206,12 @@ msgstr ""
 msgid "Audio"
 msgstr ""
 
-#: widgets/PodcastWidget.php:283
+#: widgets/PodcastWidget.php:288
 msgid "Please select an episode from the widget settings"
+msgstr ""
+
+#: widgets/PodcastWidget.php:284
+msgid "Unable to load episodes from Spotify. Please check your API keys and Show ID in the PulseShare settings."
 msgstr ""
 
 #: includes/options/OptionsPanel.php:109
