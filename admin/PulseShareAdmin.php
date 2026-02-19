@@ -43,22 +43,6 @@ class PulseShareAdmin {
 	private $version;
 
 	/**
-	 * Minimum Elementor Version
-	 *
-	 * @since 1.0.0
-	 * @var string Minimum Elementor version required to run the addon.
-	 */
-	const MINIMUM_ELEMENTOR_VERSION = '3.7.0';
-
-	/**
-	 * Minimum PHP Version
-	 *
-	 * @since 1.0.0
-	 * @var string Minimum PHP version required to run the addon.
-	 */
-	const MINIMUM_PHP_VERSION = '7.3';
-
-	/**
 	 * The loader that's responsible for maintaining and registering all hooks that power
 	 * the plugin.
 	 *
