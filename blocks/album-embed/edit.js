@@ -6,7 +6,7 @@ import {
 	__experimentalUnitControl as UnitControl,
 } from '@wordpress/components';
 import { InspectorControls, useBlockProps } from '@wordpress/block-editor';
-import { useEffect } from '@wordpress/element';
+import { useEffect, useState } from '@wordpress/element';
 import apiFetch from '@wordpress/api-fetch';
 import classnames from 'classnames';
 
@@ -39,13 +39,17 @@ export default function AlbumEmbedEdit({ attributes, setAttributes, clientId, cl
 	}, [blockID, clientId, setAttributes]);
 
 	// Fetch tracks via the server-side REST API proxy.
+	const [error, setError] = useState(null);
+
 	useEffect(() => {
 		apiFetch({ path: '/pulseshare/v1/tracks' })
 			.then((tracks) => {
 				setAttributes({ albumArray: tracks });
+				setError(null);
 			})
-			.catch((error) => {
-				console.error('PulseShare: Failed to fetch tracks', error);
+			.catch((err) => {
+				console.error('PulseShare: Failed to fetch tracks', err);
+				setError(err?.message || 'Failed to load tracks from Spotify.');
 			});
 	}, []); // eslint-disable-line react-hooks/exhaustive-deps
 
@@ -78,7 +82,7 @@ export default function AlbumEmbedEdit({ attributes, setAttributes, clientId, cl
 								label={__('Select Track', 'pulseshare')}
 								help="Selected track will be displayed in the frontend."
 								value={
-									currentTrack
+									currentTrack?.id
 										? currentTrack.id
 										: albumArray[0]?.id
 								}
@@ -91,7 +95,7 @@ export default function AlbumEmbedEdit({ attributes, setAttributes, clientId, cl
 								onChange={(id) => {
 									setAttributes({
 										currentTrack: albumArray.find(
-											(track) => track.id === id
+											(track) => String(track.id) === String(id)
 										),
 									});
 								}}
@@ -148,7 +152,12 @@ export default function AlbumEmbedEdit({ attributes, setAttributes, clientId, cl
 			<div className={classes} id={blockID}>
 				<div className="container">
 					<div className={'sfwe-episode'}>
-						{displayType === 'single' && !currentTrack?.id && (
+						{error && (
+							<div className="notice notice-error alt">
+								<p>{error}</p>
+							</div>
+						)}
+						{displayType === 'single' && !currentTrack?.id && !error && (
 							<div className="notice notice-info alt">
 								<p>
 									<i>
