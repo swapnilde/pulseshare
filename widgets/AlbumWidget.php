@@ -234,7 +234,7 @@ class AlbumWidget extends Widget_Base {
 
 		?>
 
-		<div <?php echo esc_attr( $this->get_render_attribute_string( 'container' ) ); ?>>
+		<div <?php echo $this->get_render_attribute_string( 'container' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>>
 			<?php if ( 'full' === $settings['sfwe_album_display_type'] ) : ?>
 				<iframe
 					id="sfwe-show-<?php echo esc_attr( $pulseshare_options['pulseshare_album_id'] ?? '' ); ?>"
