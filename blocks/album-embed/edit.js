@@ -172,7 +172,8 @@ export default function AlbumEmbedEdit({ attributes, setAttributes, clientId, cl
 								height={height ? height : '200'}
 								src={
 									'https://open.spotify.com/embed/track/' +
-									currentTrack.id
+									currentTrack.id +
+									'?utm_source=generator'
 								}
 							></iframe>
 						)}
@@ -192,7 +193,8 @@ export default function AlbumEmbedEdit({ attributes, setAttributes, clientId, cl
 								src={
 									'https://open.spotify.com/embed/album/' +
 									PulseShareAdminVars.pulseshare_options
-										.album_id
+										.album_id +
+									'?utm_source=generator'
 								}
 							></iframe>
 						)}

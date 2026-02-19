@@ -244,7 +244,7 @@ class AlbumWidget extends Widget_Base {
 					loading="lazy"
 					width="<?php echo esc_attr( $width ); ?>"
 					height="<?php echo esc_attr( $height ); ?>"
-					src="https://open.spotify.com/embed/album/<?php echo esc_attr( $pulseshare_options['pulseshare_album_id'] ?? '' ); ?>">
+					src="https://open.spotify.com/embed/album/<?php echo esc_attr( $pulseshare_options['pulseshare_album_id'] ?? '' ); ?>?utm_source=generator">
 				</iframe>
 			<?php endif; ?>
 
@@ -257,7 +257,7 @@ class AlbumWidget extends Widget_Base {
 					loading="lazy"
 					width="<?php echo esc_attr( $width ); ?>"
 					height="<?php echo esc_attr( $height ); ?>"
-					src="https://open.spotify.com/embed/track/<?php echo esc_attr( $settings['sfwe_album_list'] ?? '' ); ?>">
+					src="https://open.spotify.com/embed/track/<?php echo esc_attr( $settings['sfwe_album_list'] ?? '' ); ?>?utm_source=generator">
 				</iframe>
 			<?php endif; ?>
 

@@ -205,7 +205,8 @@ export default function ListEmbedEdit({ attributes, setAttributes, clientId, cla
 									'https://open.spotify.com/embed/episode/' +
 									currentEpisode.id +
 									'/' +
-									video
+									video +
+									'?utm_source=generator'
 								}
 							></iframe>
 						)}
@@ -223,7 +224,8 @@ export default function ListEmbedEdit({ attributes, setAttributes, clientId, cla
 								height={height ? height : '200'}
 								src={
 									'https://open.spotify.com/embed/show/' +
-									PulseShareAdminVars.pulseshare_options.show_id
+									PulseShareAdminVars.pulseshare_options.show_id +
+									'?utm_source=generator'
 								}
 							></iframe>
 						)}

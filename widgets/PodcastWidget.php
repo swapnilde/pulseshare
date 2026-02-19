@@ -261,7 +261,7 @@ class PodcastWidget extends Widget_Base {
 					loading="lazy"
 					width="<?php echo esc_attr( $width ); ?>"
 					height="<?php echo esc_attr( $height ); ?>"
-					src="https://open.spotify.com/embed/show/<?php echo esc_attr( $pulseshare_options['pulseshare_show_id'] ?? '' ); ?>">
+					src="https://open.spotify.com/embed/show/<?php echo esc_attr( $pulseshare_options['pulseshare_show_id'] ?? '' ); ?>?utm_source=generator">
 				</iframe>
 			<?php endif; ?>
 
@@ -274,7 +274,7 @@ class PodcastWidget extends Widget_Base {
 					loading="lazy"
 					width="<?php echo esc_attr( $width ); ?>"
 					height="<?php echo esc_attr( $height ); ?>"
-					src="https://open.spotify.com/embed/episode/<?php echo esc_attr( $settings['sfwe_podcast_list'] ?? '' ); ?>/<?php echo esc_attr( $video ); ?>">
+					src="https://open.spotify.com/embed/episode/<?php echo esc_attr( $settings['sfwe_podcast_list'] ?? '' ); ?>/<?php echo esc_attr( $video ); ?>?utm_source=generator">
 				</iframe>
 			<?php endif; ?>
 
