@@ -55,7 +55,7 @@ class PodcastWidget extends Widget_Base {
 	 * @inheritDoc
 	 */
 	public function get_icon() {
-		return 'eicon-video-playlist';  // TODO: Change this icon for the podcast widget.
+		return 'eicon-video-playlist';
 	}
 
 	/**

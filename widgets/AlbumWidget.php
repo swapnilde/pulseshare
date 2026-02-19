@@ -55,7 +55,7 @@ class AlbumWidget extends Widget_Base {
 	 * @inheritDoc
 	 */
 	public function get_icon() {
-		return 'eicon-play';  // TODO: Change this icon for the album widget.
+		return 'eicon-headphones';
 	}
 
 	/**
