@@ -2,9 +2,12 @@
 .vscode/
 node_modules/
 *.zip
+*.log
 .DS_Store
 vendor/
 dist/
+build/
+.wordpress-org/
 /assets
 /fonts
 /images
