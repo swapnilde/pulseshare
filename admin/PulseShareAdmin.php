@@ -302,7 +302,7 @@ class PulseShareAdmin {
 	 */
 	public function register_widgets( $widgets_manager ) {
 
-		if ( ! Helper::check_pulseshareapi_keys_empty() || did_action( 'elementor/loaded' ) ) {
+		if ( ! Helper::check_pulseshareapi_keys_empty() && did_action( 'elementor/loaded' ) ) {
 			$widgets_manager->register( new PodcastWidget() );
 			$widgets_manager->register( new AlbumWidget() );
 		}
