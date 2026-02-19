@@ -7,7 +7,6 @@ node_modules/
 vendor/
 dist/
 build/
-.wordpress-org/
 /assets
 /fonts
 /images
