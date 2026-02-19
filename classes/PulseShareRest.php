@@ -114,7 +114,8 @@ class PulseShareRest {
 			);
 		}
 
-		$url      = 'https://api.spotify.com/v1/albums/' . $album_id . '/tracks?market=US&limit=50';
+		$market   = $pulseshare_options['pulseshare_market'] ?? 'US';
+		$url      = 'https://api.spotify.com/v1/albums/' . $album_id . '/tracks?market=' . rawurlencode( $market ) . '&limit=50';
 		$response = wp_remote_get(
 			$url,
 			array(
@@ -192,7 +193,8 @@ class PulseShareRest {
 			);
 		}
 
-		$url      = 'https://api.spotify.com/v1/shows/' . $show_id . '/episodes?market=US&limit=50';
+		$market   = $pulseshare_options['pulseshare_market'] ?? 'US';
+		$url      = 'https://api.spotify.com/v1/shows/' . $show_id . '/episodes?market=' . rawurlencode( $market ) . '&limit=50';
 		$response = wp_remote_get(
 			$url,
 			array(

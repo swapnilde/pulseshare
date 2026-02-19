@@ -31,16 +31,16 @@ class Helper {
 			return '';
 		}
 
-		$key    = wp_salt( 'auth' );
-		$iv     = openssl_random_pseudo_bytes( openssl_cipher_iv_length( 'aes-256-cbc' ) );
-		$cipher = openssl_encrypt( $value, 'aes-256-cbc', $key, 0, $iv );
+		$key    = AUTH_KEY;
+		$iv     = \openssl_random_pseudo_bytes( \openssl_cipher_iv_length( 'aes-256-cbc' ) );
+		$cipher = \openssl_encrypt( $value, 'aes-256-cbc', $key, 0, $iv );
 
 		if ( false === $cipher ) {
 			return '';
 		}
 
 		// Store IV alongside ciphertext so we can decrypt later.
-		return base64_encode( $iv . '::' . $cipher );
+		return \base64_encode( $iv . '::' . $cipher );
 	}
 
 	/**
@@ -55,7 +55,7 @@ class Helper {
 			return '';
 		}
 
-		$decoded = base64_decode( $value, true );
+		$decoded = \base64_decode( $value, true );
 
 		if ( false === $decoded || strpos( $decoded, '::' ) === false ) {
 			// Not encrypted (legacy plaintext value), return as-is.
@@ -67,10 +67,10 @@ class Helper {
 			return $value;
 		}
 
-		$key       = wp_salt( 'auth' );
+		$key       = AUTH_KEY;
 		$iv        = $parts[0];
 		$cipher    = $parts[1];
-		$decrypted = openssl_decrypt( $cipher, 'aes-256-cbc', $key, 0, $iv );
+		$decrypted = \openssl_decrypt( $cipher, 'aes-256-cbc', $key, 0, $iv );
 
 		return ( false !== $decrypted ) ? $decrypted : '';
 	}
@@ -164,7 +164,8 @@ class Helper {
 			return array();
 		}
 
-		$url  = 'https://api.spotify.com/v1/shows/' . $pulseshareshow_id . '/episodes?market=US';
+		$market = $pulseshare_options['pulseshare_market'] ?? 'US';
+		$url    = 'https://api.spotify.com/v1/shows/' . $pulseshareshow_id . '/episodes?market=' . rawurlencode( $market );
 		$show = wp_remote_get(
 			$url,
 			array(
@@ -215,7 +216,8 @@ class Helper {
 			return array();
 		}
 
-		$url  = 'https://api.spotify.com/v1/albums/' . $pulseshareshow_id . '/tracks?market=US';
+		$market = $pulseshare_options['pulseshare_market'] ?? 'US';
+		$url    = 'https://api.spotify.com/v1/albums/' . $pulseshareshow_id . '/tracks?market=' . rawurlencode( $market );
 		$show = wp_remote_get(
 			$url,
 			array(
@@ -294,6 +296,13 @@ class Helper {
 				'label'       => esc_html__( 'Album ID', 'pulseshare' ),
 				'type'        => 'text',
 				'description' => '',
+				'tab'         => 'pulseshare-integration-tab',
+			),
+			'pulseshare_market'        => array(
+				'label'       => esc_html__( 'Market', 'pulseshare' ),
+				'type'        => 'text',
+				'description' => esc_html__( 'ISO 3166-1 alpha-2 country code (e.g. US, GB, IN).', 'pulseshare' ),
+				'default'     => 'US',
 				'tab'         => 'pulseshare-integration-tab',
 			),
 		);
