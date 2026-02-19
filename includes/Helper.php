@@ -42,26 +42,49 @@ class Helper {
 	 * @return string Access token.
 	 */
 	public static function get_pulseshareaccess_token() {
-		$url                = 'https://accounts.spotify.com/api/token';
-		$access_token       = get_transient( 'pulseshare_access_token' );
-		$pulseshare_options = get_option( 'pulseshare_options' );
-		if ( empty( $access_token ) ) {
-			$token_data      = wp_remote_post(
-				$url,
-				array(
-					'body' => array(
-						'grant_type'    => 'client_credentials',
-						'client_id'     => $pulseshare_options['pulseshare_client_id'] ?? '',
-						'client_secret' => $pulseshare_options['pulseshare_client_secret'] ?? '',
-					),
-				)
-			);
-			$parsed_response = json_decode( wp_remote_retrieve_body( $token_data ) );
-			set_transient( 'pulseshare_access_token', $parsed_response->access_token, $parsed_response->expires_in );
-			$access_token = $parsed_response->access_token;
+		$access_token = get_transient( 'pulseshare_access_token' );
+
+		if ( ! empty( $access_token ) ) {
+			return $access_token;
 		}
 
-		return $access_token;
+		$pulseshare_options = get_option( 'pulseshare_options' );
+		$client_id          = $pulseshare_options['pulseshare_client_id'] ?? '';
+		$client_secret      = $pulseshare_options['pulseshare_client_secret'] ?? '';
+
+		if ( empty( $client_id ) || empty( $client_secret ) ) {
+			return '';
+		}
+
+		$token_data = wp_remote_post(
+			'https://accounts.spotify.com/api/token',
+			array(
+				'body' => array(
+					'grant_type'    => 'client_credentials',
+					'client_id'     => $client_id,
+					'client_secret' => $client_secret,
+				),
+			)
+		);
+
+		if ( is_wp_error( $token_data ) ) {
+			return '';
+		}
+
+		$status_code = wp_remote_retrieve_response_code( $token_data );
+		if ( 200 !== $status_code ) {
+			return '';
+		}
+
+		$parsed_response = json_decode( wp_remote_retrieve_body( $token_data ) );
+
+		if ( empty( $parsed_response ) || ! isset( $parsed_response->access_token, $parsed_response->expires_in ) ) {
+			return '';
+		}
+
+		set_transient( 'pulseshare_access_token', $parsed_response->access_token, $parsed_response->expires_in );
+
+		return $parsed_response->access_token;
 	}
 
 	/**
@@ -74,9 +97,19 @@ class Helper {
 	public static function get_pulseshareall_episodes() {
 		$pulseshare_options = get_option( 'pulseshare_options' );
 		$pulseshareshow_id  = $pulseshare_options['pulseshare_show_id'] ?? '';
-		$url                = 'https://api.spotify.com/v1/shows/' . $pulseshareshow_id . '/episodes?market=US';
-		$access_token       = self::get_pulseshareaccess_token();
-		$show               = wp_remote_get(
+
+		if ( empty( $pulseshareshow_id ) ) {
+			return array();
+		}
+
+		$access_token = self::get_pulseshareaccess_token();
+
+		if ( empty( $access_token ) ) {
+			return array();
+		}
+
+		$url  = 'https://api.spotify.com/v1/shows/' . $pulseshareshow_id . '/episodes?market=US';
+		$show = wp_remote_get(
 			$url,
 			array(
 				'headers' => array(
@@ -84,10 +117,22 @@ class Helper {
 				),
 			)
 		);
-		$episodes           = json_decode( wp_remote_retrieve_body( $show ) );
-		$episodes_array     = array();
+
+		if ( is_wp_error( $show ) ) {
+			return array();
+		}
+
+		$episodes = json_decode( wp_remote_retrieve_body( $show ) );
+
+		if ( empty( $episodes ) || ! isset( $episodes->items ) || ! is_array( $episodes->items ) ) {
+			return array();
+		}
+
+		$episodes_array = array();
 		foreach ( $episodes->items as $episode ) {
-			$episodes_array[ $episode->id ] = $episode->name;
+			if ( isset( $episode->id, $episode->name ) ) {
+				$episodes_array[ $episode->id ] = $episode->name;
+			}
 		}
 
 		return $episodes_array;
@@ -103,9 +148,19 @@ class Helper {
 	public static function get_pulseshareshow_tracks() {
 		$pulseshare_options = get_option( 'pulseshare_options' );
 		$pulseshareshow_id  = $pulseshare_options['pulseshare_album_id'] ?? '';
-		$url                = 'https://api.spotify.com/v1/albums/' . $pulseshareshow_id . '/tracks?market=US';
-		$access_token       = self::get_pulseshareaccess_token();
-		$show               = wp_remote_get(
+
+		if ( empty( $pulseshareshow_id ) ) {
+			return array();
+		}
+
+		$access_token = self::get_pulseshareaccess_token();
+
+		if ( empty( $access_token ) ) {
+			return array();
+		}
+
+		$url  = 'https://api.spotify.com/v1/albums/' . $pulseshareshow_id . '/tracks?market=US';
+		$show = wp_remote_get(
 			$url,
 			array(
 				'headers' => array(
@@ -113,10 +168,22 @@ class Helper {
 				),
 			)
 		);
-		$tracks             = json_decode( wp_remote_retrieve_body( $show ) );
-		$tracks_array       = array();
+
+		if ( is_wp_error( $show ) ) {
+			return array();
+		}
+
+		$tracks = json_decode( wp_remote_retrieve_body( $show ) );
+
+		if ( empty( $tracks ) || ! isset( $tracks->items ) || ! is_array( $tracks->items ) ) {
+			return array();
+		}
+
+		$tracks_array = array();
 		foreach ( $tracks->items as $track ) {
-			$tracks_array[ $track->id ] = $track->name;
+			if ( isset( $track->id, $track->name ) ) {
+				$tracks_array[ $track->id ] = $track->name;
+			}
 		}
 
 		return $tracks_array;
