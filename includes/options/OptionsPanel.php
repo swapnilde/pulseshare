@@ -9,6 +9,8 @@
 
 namespace PulseShare\Includes\Options;
 
+use PulseShare\Includes\Helper;
+
 // If this file is called directly, abort.
 if ( ! defined( 'WPINC' ) ) {
 	die;
@@ -212,7 +214,14 @@ class OptionsPanel {
 			$new_option_value = $value[ $key ] ?? '';
 			if ( $new_option_value ) {
 				$sanitize_callback = $args['sanitize_callback'] ?? $this->get_sanitize_callback_by_type( $field_type );
-				$new_value[ $key ] = call_user_func( $sanitize_callback, $new_option_value, $args );
+				$sanitized_value   = call_user_func( $sanitize_callback, $new_option_value, $args );
+
+				// Encrypt password fields before storing.
+				if ( 'password' === $field_type && ! empty( $sanitized_value ) ) {
+					$sanitized_value = Helper::encrypt( $sanitized_value );
+				}
+
+				$new_value[ $key ] = $sanitized_value;
 			} elseif ( 'checkbox' === $field_type ) {
 				$new_value[ $key ] = 0;
 			}
@@ -238,8 +247,9 @@ class OptionsPanel {
 				return 'wp_kses_post';
 			case 'checkbox':
 				return array( $this, 'sanitize_checkbox_field' );
-			default:
+			case 'password':
 			case 'text':
+			default:
 				return 'sanitize_text_field';
 		}
 	}
@@ -364,6 +374,33 @@ class OptionsPanel {
 			id="<?php echo esc_attr( $args['label_for'] ); ?>"
 			name="<?php echo esc_attr( $this->option_name ); ?>[<?php echo esc_attr( $args['label_for'] ); ?>]"
 			value="<?php echo esc_attr( $value ); ?>">
+		<?php if ( $description ) { ?>
+			<p class="description"><?php echo esc_html( $description ); ?></p>
+		<?php } ?>
+		<?php
+	}
+
+	/**
+	 * Renders a password field.
+	 *
+	 * @since 1.0.3
+	 * @access public
+	 * @param array $args Array of arguments.
+	 *
+	 * @return void
+	 */
+	public function render_password_field( $args ) {
+		$option_name = $args['label_for'];
+		$raw_value   = $this->get_option_value( $option_name );
+		$value       = Helper::decrypt( $raw_value );
+		$description = $this->settings[ $option_name ]['description'] ?? '';
+		?>
+		<input
+			type="password"
+			id="<?php echo esc_attr( $args['label_for'] ); ?>"
+			name="<?php echo esc_attr( $this->option_name ); ?>[<?php echo esc_attr( $args['label_for'] ); ?>]"
+			value="<?php echo esc_attr( $value ); ?>"
+			autocomplete="off">
 		<?php if ( $description ) { ?>
 			<p class="description"><?php echo esc_html( $description ); ?></p>
 		<?php } ?>
