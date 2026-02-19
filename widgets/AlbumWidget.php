@@ -20,7 +20,7 @@ use Elementor\Widget_Base;
 use Elementor\Controls_Manager;
 use Elementor\Plugin;
 use Elementor\Utils;
-use PulseShare\includes\Helper;
+use PulseShare\Includes\Helper;
 
 /**
  * AlbumWidget
@@ -55,7 +55,7 @@ class AlbumWidget extends Widget_Base {
 	 * @inheritDoc
 	 */
 	public function get_icon() {
-		return 'eicon-play';  // TODO: Change this icon for the album widget.
+		return 'eicon-headphones';
 	}
 
 	/**
@@ -234,7 +234,7 @@ class AlbumWidget extends Widget_Base {
 
 		?>
 
-		<div <?php echo esc_attr( $this->get_render_attribute_string( 'container' ) ); ?>>
+		<div <?php echo $this->get_render_attribute_string( 'container' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>>
 			<?php if ( 'full' === $settings['sfwe_album_display_type'] ) : ?>
 				<iframe
 					id="sfwe-show-<?php echo esc_attr( $pulseshare_options['pulseshare_album_id'] ?? '' ); ?>"
@@ -244,7 +244,7 @@ class AlbumWidget extends Widget_Base {
 					loading="lazy"
 					width="<?php echo esc_attr( $width ); ?>"
 					height="<?php echo esc_attr( $height ); ?>"
-					src="https://open.spotify.com/embed/album/<?php echo esc_attr( $pulseshare_options['pulseshare_album_id'] ?? '' ); ?>">
+					src="https://open.spotify.com/embed/album/<?php echo esc_attr( $pulseshare_options['pulseshare_album_id'] ?? '' ); ?>?utm_source=generator">
 				</iframe>
 			<?php endif; ?>
 
@@ -257,7 +257,7 @@ class AlbumWidget extends Widget_Base {
 					loading="lazy"
 					width="<?php echo esc_attr( $width ); ?>"
 					height="<?php echo esc_attr( $height ); ?>"
-					src="https://open.spotify.com/embed/track/<?php echo esc_attr( $settings['sfwe_album_list'] ?? '' ); ?>">
+					src="https://open.spotify.com/embed/track/<?php echo esc_attr( $settings['sfwe_album_list'] ?? '' ); ?>?utm_source=generator">
 				</iframe>
 			<?php endif; ?>
 

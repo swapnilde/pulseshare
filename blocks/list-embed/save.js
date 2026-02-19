@@ -8,32 +8,33 @@ import classnames from 'classnames';
  *
  * @return {JSX} Element to render.
  */
-export default function listEmbedSave( props ) {
+export default function listEmbedSave(props) {
 	const { className, attributes } = props;
 	const { blockID, currentEpisode, displayType, height, width } = attributes;
 
-	const classes = classnames( className, 'list-embed' );
+	const classes = classnames(className, 'list-embed');
 
 	return (
-		<div className={ classes } id={ blockID }>
+		<div className={classes} id={blockID}>
 			<div className="container">
-				<div className={ 'sfwe-episode' }>
-					{ displayType === 'single' && currentEpisode.id && (
+				<div className={'sfwe-episode'}>
+					{displayType === 'single' && currentEpisode.id && (
 						<iframe
-							id={ 'sfwe-episode-' + currentEpisode.id }
+							id={'sfwe-episode-' + currentEpisode.id}
 							frameBorder="0"
 							allowFullScreen=""
 							allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
 							loading="lazy"
-							width={ width ? width : '100%' }
-							height={ height ? height : '200' }
+							width={width ? width : '100%'}
+							height={height ? height : '200'}
 							src={
 								'https://open.spotify.com/embed/episode/' +
-								currentEpisode.id
+								currentEpisode.id +
+								'?utm_source=generator'
 							}
 						></iframe>
-					) }
-					{ displayType === 'full' && (
+					)}
+					{displayType === 'full' && (
 						<iframe
 							id={
 								'sfwe-show-' +
@@ -43,14 +44,15 @@ export default function listEmbedSave( props ) {
 							allowFullScreen=""
 							allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
 							loading="lazy"
-							width={ width ? width : '100%' }
-							height={ height ? height : '200' }
+							width={width ? width : '100%'}
+							height={height ? height : '200'}
 							src={
 								'https://open.spotify.com/embed/show/' +
-								PulseShareAdminVars.pulseshare_options.show_id
+								PulseShareAdminVars.pulseshare_options.show_id +
+								'?utm_source=generator'
 							}
 						></iframe>
-					) }
+					)}
 				</div>
 			</div>
 		</div>

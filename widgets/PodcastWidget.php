@@ -20,7 +20,7 @@ use Elementor\Widget_Base;
 use Elementor\Controls_Manager;
 use Elementor\Plugin;
 use Elementor\Utils;
-use PulseShare\includes\Helper;
+use PulseShare\Includes\Helper;
 
 /**
  * PodcastWidget
@@ -55,7 +55,7 @@ class PodcastWidget extends Widget_Base {
 	 * @inheritDoc
 	 */
 	public function get_icon() {
-		return 'eicon-video-playlist';  // TODO: Change this icon for the podcast widget.
+		return 'eicon-video-playlist';
 	}
 
 	/**
@@ -251,7 +251,7 @@ class PodcastWidget extends Widget_Base {
 
 		?>
 
-		<div <?php echo esc_attr( $this->get_render_attribute_string( 'container' ) ); ?>>
+		<div <?php echo $this->get_render_attribute_string( 'container' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>>
 			<?php if ( 'full' === $settings['sfwe_podcast_display_type'] ) : ?>
 				<iframe
 					id="sfwe-show-<?php echo esc_attr( $pulseshare_options['pulseshare_show_id'] ?? '' ); ?>"
@@ -261,7 +261,7 @@ class PodcastWidget extends Widget_Base {
 					loading="lazy"
 					width="<?php echo esc_attr( $width ); ?>"
 					height="<?php echo esc_attr( $height ); ?>"
-					src="https://open.spotify.com/embed/show/<?php echo esc_attr( $pulseshare_options['pulseshare_show_id'] ?? '' ); ?>">
+					src="https://open.spotify.com/embed/show/<?php echo esc_attr( $pulseshare_options['pulseshare_show_id'] ?? '' ); ?>?utm_source=generator">
 				</iframe>
 			<?php endif; ?>
 
@@ -274,7 +274,7 @@ class PodcastWidget extends Widget_Base {
 					loading="lazy"
 					width="<?php echo esc_attr( $width ); ?>"
 					height="<?php echo esc_attr( $height ); ?>"
-					src="https://open.spotify.com/embed/episode/<?php echo esc_attr( $settings['sfwe_podcast_list'] ?? '' ); ?>/<?php echo esc_attr( $video ); ?>">
+					src="https://open.spotify.com/embed/episode/<?php echo esc_attr( $settings['sfwe_podcast_list'] ?? '' ); ?>/<?php echo esc_attr( $video ); ?>?utm_source=generator">
 				</iframe>
 			<?php endif; ?>
 

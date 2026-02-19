@@ -2,9 +2,11 @@
 .vscode/
 node_modules/
 *.zip
+*.log
 .DS_Store
 vendor/
 dist/
+build/
 /assets
 /fonts
 /images

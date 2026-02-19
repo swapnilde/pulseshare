@@ -8,32 +8,33 @@ import classnames from 'classnames';
  *
  * @return {JSX} Element to render.
  */
-export default function albumEmbedSave( props ) {
+export default function albumEmbedSave(props) {
 	const { className, attributes } = props;
 	const { blockID, currentTrack, displayType, height, width } = attributes;
 
-	const classes = classnames( className, 'album-embed' );
+	const classes = classnames(className, 'album-embed');
 
 	return (
-		<div className={ classes } id={ blockID }>
+		<div className={classes} id={blockID}>
 			<div className="container">
-				<div className={ 'sfwe-episode' }>
-					{ displayType === 'single' && currentTrack.id && (
+				<div className={'sfwe-episode'}>
+					{displayType === 'single' && currentTrack.id && (
 						<iframe
-							id={ 'sfwe-track-' + currentTrack.id }
+							id={'sfwe-track-' + currentTrack.id}
 							frameBorder="0"
 							allowFullScreen=""
 							allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
 							loading="lazy"
-							width={ width ? width : '100%' }
-							height={ height ? height : '200' }
+							width={width ? width : '100%'}
+							height={height ? height : '200'}
 							src={
 								'https://open.spotify.com/embed/track/' +
-								currentTrack.id
+								currentTrack.id +
+								'?utm_source=generator'
 							}
 						></iframe>
-					) }
-					{ displayType === 'full' && (
+					)}
+					{displayType === 'full' && (
 						<iframe
 							id={
 								'sfwe-album-' +
@@ -43,14 +44,15 @@ export default function albumEmbedSave( props ) {
 							allowFullScreen=""
 							allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
 							loading="lazy"
-							width={ width ? width : '100%' }
-							height={ height ? height : '380' }
+							width={width ? width : '100%'}
+							height={height ? height : '380'}
 							src={
 								'https://open.spotify.com/embed/album/' +
-								PulseShareAdminVars.pulseshare_options.album_id
+								PulseShareAdminVars.pulseshare_options.album_id +
+								'?utm_source=generator'
 							}
 						></iframe>
-					) }
+					)}
 				</div>
 			</div>
 		</div>

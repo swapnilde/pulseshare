@@ -20,7 +20,8 @@ use PulseShare\Classes\PulseShareLoader;
 use PulseShare\Classes\PulseShareI18n;
 use PulseShare\Admin\PulseShareAdmin;
 use PulseShare\Includes\Options\OptionsPanel;
-use PulseShare\includes\Helper;
+use PulseShare\Includes\Helper;
+use PulseShare\Classes\PulseShareRest;
 
 /**
  * The core plugin class.
@@ -205,6 +206,10 @@ class PulseShare {
 		if ( $this->is_compatible() ) {
 			$this->loader->add_action( 'elementor/init', $this->plugin_admin, 'init_widgets' );
 		}
+
+		// Register REST API routes.
+		$rest_controller = new PulseShareRest();
+		$this->loader->add_action( 'rest_api_init', $rest_controller, 'register_routes' );
 	}
 
 	/**

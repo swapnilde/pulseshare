@@ -1,11 +1,17 @@
 {
 	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
 	"name": "pulseshare/album-embed",
-	"version": "1.0.0",
+	"version": "1.1.0",
 	"title": "Album & Tracks",
 	"category": "pulseshare",
 	"description": "Display a list of album tracks to embed in your posts.",
-	"keywords": [ "spotify", "album", "track", "embed" ],
+	"keywords": [
+		"spotify",
+		"album",
+		"track",
+		"embed"
+	],
 	"supports": {
 		"html": false
 	},

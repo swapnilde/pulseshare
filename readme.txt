@@ -3,8 +3,8 @@ Contributors: swapnilde
 Donate link: https://paypal.me/SwapnilDeshpandeIN  
 Tags: spotify, podcast, album, embed, audio, video player, wordpress, elementor  
 Requires at least: 6.6
-Tested up to: 6.8.2
-Stable tag: 1.0.2  
+Tested up to: 6.9.1
+Stable tag: 1.1.0  
 Requires PHP: 8.0
 License: GPLv2 or later  
 License URI: https://www.gnu.org/licenses/gpl-2.0.html  
@@ -89,6 +89,26 @@ Yes, you need to create a Spotify Developer Account to get the Client ID and Cli
 4. Elementor - Here you can add the PulseShare widgets in Elementor.
 
 == Changelog ==
+
+= 1.1.0 =
+* New: Server-side REST API proxy for Spotify — API credentials are no longer exposed to the browser.
+* New: AES-256-CBC encryption for the Spotify client secret.
+* New: Configurable Spotify market option for API requests.
+* New: Append utm_source to all Spotify embed URLs.
+* Improvement: Converted block editor components from class to functional components.
+* Improvement: Standardized namespace capitalization across the plugin.
+* Improvement: Comprehensive error handling and validation for Spotify API calls.
+* Improvement: Updated block API version to 3.
+* Improvement: Updated Album widget icon.
+* Improvement: Added .distignore for cleaner plugin distribution.
+* Improvement: Updated CI/CD workflows with Node.js build steps.
+* Improvement: Compatibility with latest WordPress and Elementor versions.
+* Fix: Widget registration now requires both non-empty API keys and Elementor.
+* Fix: Plugin options and cached access token are properly deleted on uninstall.
+* Fix: Corrected malformed CSS closing tag in options panel.
+* Fix: Corrected typo in settings error message ID.
+* Dev: Cleaned up unused dependencies.
+* Dev: Added PHPCS ignore comments for base64 functions and unused parameters.
 
 = 1.0.2 =
 * Improvement: Compatibility with latest WordPress version.

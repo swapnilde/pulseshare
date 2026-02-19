@@ -11,11 +11,14 @@ mix.options({
   resourceRoot: '../../../',
 });
 
-mix.autoload({
-  jquery: ['$', 'window.jQuery', 'jQuery'],
+mix.webpackConfig({
+  externals: {
+    jquery: 'jQuery',
+  },
+  resolve: {
+    extensions: ['.*', '.wasm', '.mjs', '.js', '.jsx', '.json'],
+  },
 });
-
-mix.extract('assets/vendor.js');
 
 mix.js('admin/js/pulseshare-wordpress-elementor-admin.js', 'assets/admin/js');
 

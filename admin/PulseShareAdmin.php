@@ -10,7 +10,7 @@
 namespace PulseShare\Admin;
 
 use PulseShare\Classes\PulseShareLoader;
-use PulseShare\includes\Helper;
+use PulseShare\Includes\Helper;
 use PulseShare\Widgets\AlbumWidget;
 use PulseShare\Widgets\PodcastWidget;
 
@@ -41,22 +41,6 @@ class PulseShareAdmin {
 	 * @var      string    $version    The current version of this plugin.
 	 */
 	private $version;
-
-	/**
-	 * Minimum Elementor Version
-	 *
-	 * @since 1.0.0
-	 * @var string Minimum Elementor version required to run the addon.
-	 */
-	const MINIMUM_ELEMENTOR_VERSION = '3.7.0';
-
-	/**
-	 * Minimum PHP Version
-	 *
-	 * @since 1.0.0
-	 * @var string Minimum PHP version required to run the addon.
-	 */
-	const MINIMUM_PHP_VERSION = '7.3';
 
 	/**
 	 * The loader that's responsible for maintaining and registering all hooks that power
@@ -132,6 +116,8 @@ class PulseShareAdmin {
 			)
 		);
 
+		$pulseshare_options = get_option( 'pulseshare_options' );
+
 		wp_localize_script(
 			$this->plugin_name,
 			'PulseShareAdminVars',
@@ -140,13 +126,10 @@ class PulseShareAdmin {
 				'site_url'           => esc_url_raw( get_site_url() ),
 				'ajax_url'           => admin_url( 'admin-ajax.php' ),
 				'rest_url'           => esc_url_raw( get_rest_url() ),
-				'user'               => wp_get_current_user(),
-				'user_avatar'        => get_avatar_url( wp_get_current_user()->ID ),
+				'rest_nonce'         => wp_create_nonce( 'wp_rest' ),
 				'pulseshare_options' => array(
-					'client_id'     => Helper::check_pulseshareapi_keys_empty() ? '' : get_option( 'pulseshare_options' )['pulseshare_client_id'],
-					'client_secret' => Helper::check_pulseshareapi_keys_empty() ? '' : get_option( 'pulseshare_options' )['pulseshare_client_secret'],
-					'show_id'       => get_option( 'pulseshare_options' )['pulseshare_show_id'] ?? '',
-					'album_id'      => get_option( 'pulseshare_options' )['pulseshare_album_id'] ?? '',
+					'show_id'  => $pulseshare_options['pulseshare_show_id'] ?? '',
+					'album_id' => $pulseshare_options['pulseshare_album_id'] ?? '',
 				),
 			)
 		);
@@ -319,7 +302,7 @@ class PulseShareAdmin {
 	 */
 	public function register_widgets( $widgets_manager ) {
 
-		if ( ! Helper::check_pulseshareapi_keys_empty() || did_action( 'elementor/loaded' ) ) {
+		if ( ! Helper::check_pulseshareapi_keys_empty() && did_action( 'elementor/loaded' ) ) {
 			$widgets_manager->register( new PodcastWidget() );
 			$widgets_manager->register( new AlbumWidget() );
 		}
