@@ -528,7 +528,7 @@ class OptionsPanel {
 	 *
 	 * @return int Sanitized value.
 	 */
-	protected function sanitize_checkbox_field( $value = '', $field_args = array() ) {
+	protected function sanitize_checkbox_field( $value = '', $field_args = array() ) { // phpcs:ignore Generic.CodeAnalysis.UnusedFunctionParameter.FoundAfterLastUsed -- Required by call_user_func callback signature.
 		return ( 'on' === $value ) ? 1 : 0;
 	}
 

@@ -40,7 +40,7 @@ class Helper {
 		}
 
 		// Store IV alongside ciphertext so we can decrypt later.
-		return \base64_encode( $iv . '::' . $cipher );
+		return \base64_encode( $iv . '::' . $cipher ); // phpcs:ignore WordPress.PHP.DiscouragedPHPFunctions.obfuscation_base64_encode -- Used for encryption storage, not obfuscation.
 	}
 
 	/**
@@ -55,7 +55,7 @@ class Helper {
 			return '';
 		}
 
-		$decoded = \base64_decode( $value, true );
+		$decoded = \base64_decode( $value, true ); // phpcs:ignore WordPress.PHP.DiscouragedPHPFunctions.obfuscation_base64_decode -- Used for decrypting stored values, not obfuscation.
 
 		if ( false === $decoded || strpos( $decoded, '::' ) === false ) {
 			// Not encrypted (legacy plaintext value), return as-is.
@@ -166,7 +166,7 @@ class Helper {
 
 		$market = $pulseshare_options['pulseshare_market'] ?? 'US';
 		$url    = 'https://api.spotify.com/v1/shows/' . $pulseshareshow_id . '/episodes?market=' . rawurlencode( $market );
-		$show = wp_remote_get(
+		$show   = wp_remote_get(
 			$url,
 			array(
 				'headers' => array(
@@ -218,7 +218,7 @@ class Helper {
 
 		$market = $pulseshare_options['pulseshare_market'] ?? 'US';
 		$url    = 'https://api.spotify.com/v1/albums/' . $pulseshareshow_id . '/tracks?market=' . rawurlencode( $market );
-		$show = wp_remote_get(
+		$show   = wp_remote_get(
 			$url,
 			array(
 				'headers' => array(
