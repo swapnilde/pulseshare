@@ -4,7 +4,7 @@ Donate link: https://paypal.me/SwapnilDeshpandeIN
 Tags: spotify, podcast, album, embed, audio, video player, wordpress, elementor  
 Requires at least: 6.6
 Tested up to: 6.9.1
-Stable tag: 1.1.1  
+Stable tag: 1.1.2  
 Requires PHP: 8.0
 License: GPLv2 or later  
 License URI: https://www.gnu.org/licenses/gpl-2.0.html  
@@ -89,6 +89,11 @@ Yes, you need to create a Spotify Developer Account to get the Client ID and Cli
 4. Elementor - Here you can add the PulseShare widgets in Elementor.
 
 == Changelog ==
+
+= 1.1.2 =
+* Improvement: Streamlined settings storage for better reliability.
+* Improvement: Optimized settings page performance.
+* Dev: Internal code cleanup.
 
 = 1.1.1 =
 * Improvement: Spotify API error handling and user feedback in blocks and Elementor widgets.

@@ -6,7 +6,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-02-19 16:37+0000\n"
+"POT-Creation-Date: 2026-02-20 14:08+0000\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-KeywordsList: __;_e;_ex:1,2c;_n:1,2;_n_noop:1,2;_nx:1,2,4c;_nx_noop:1,2,3c;_x:1,2c;esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c\n"
 "X-Poedit-SearchPath-0: .\n"
@@ -78,35 +78,35 @@ msgstr ""
 msgid "Show ID is not configured."
 msgstr ""
 
-#: includes/Helper.php:266
+#: includes/Helper.php:210
 msgid "API Keys"
 msgstr ""
 
-#: includes/Helper.php:267
+#: includes/Helper.php:211
 msgid "Integrations"
 msgstr ""
 
-#: includes/Helper.php:277
+#: includes/Helper.php:221
 msgid "Client ID"
 msgstr ""
 
-#: includes/Helper.php:283
+#: includes/Helper.php:227
 msgid "Client Secret"
 msgstr ""
 
-#: includes/Helper.php:290
+#: includes/Helper.php:234
 msgid "Podcast Show ID"
 msgstr ""
 
-#: includes/Helper.php:296
+#: includes/Helper.php:240
 msgid "Album ID"
 msgstr ""
 
-#: includes/Helper.php:302
+#: includes/Helper.php:246
 msgid "Market"
 msgstr ""
 
-#: includes/Helper.php:304
+#: includes/Helper.php:248
 msgid "ISO 3166-1 alpha-2 country code (e.g. US, GB, IN)."
 msgstr ""
 
@@ -214,10 +214,10 @@ msgstr ""
 msgid "Unable to load episodes from Spotify. Please check your API keys and Show ID in the PulseShare settings."
 msgstr ""
 
-#: includes/options/OptionsPanel.php:109
+#: includes/options/OptionsPanel.php:108
 msgid "Options"
 msgstr ""
 
-#: includes/options/OptionsPanel.php:272
+#: includes/options/OptionsPanel.php:266
 msgid "Settings Saved"
 msgstr ""

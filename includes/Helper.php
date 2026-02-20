@@ -20,62 +20,6 @@ if ( ! defined( 'WPINC' ) ) {
 class Helper {
 
 	/**
-	 * Encrypt a value using AES-256-CBC.
-	 *
-	 * @since  1.0.3
-	 * @param  string $value The plaintext value to encrypt.
-	 * @return string The encrypted value (base64-encoded).
-	 */
-	public static function encrypt( $value ) {
-		if ( empty( $value ) ) {
-			return '';
-		}
-
-		$key    = AUTH_KEY;
-		$iv     = \openssl_random_pseudo_bytes( \openssl_cipher_iv_length( 'aes-256-cbc' ) );
-		$cipher = \openssl_encrypt( $value, 'aes-256-cbc', $key, 0, $iv );
-
-		if ( false === $cipher ) {
-			return '';
-		}
-
-		// Store IV alongside ciphertext so we can decrypt later.
-		return \base64_encode( $iv . '::' . $cipher ); // phpcs:ignore WordPress.PHP.DiscouragedPHPFunctions.obfuscation_base64_encode -- Used for encryption storage, not obfuscation.
-	}
-
-	/**
-	 * Decrypt a value encrypted with self::encrypt().
-	 *
-	 * @since  1.0.3
-	 * @param  string $value The encrypted value (base64-encoded).
-	 * @return string The decrypted plaintext value.
-	 */
-	public static function decrypt( $value ) {
-		if ( empty( $value ) ) {
-			return '';
-		}
-
-		$decoded = \base64_decode( $value, true ); // phpcs:ignore WordPress.PHP.DiscouragedPHPFunctions.obfuscation_base64_decode -- Used for decrypting stored values, not obfuscation.
-
-		if ( false === $decoded || strpos( $decoded, '::' ) === false ) {
-			// Not encrypted (legacy plaintext value), return as-is.
-			return $value;
-		}
-
-		$parts = explode( '::', $decoded, 2 );
-		if ( count( $parts ) !== 2 ) {
-			return $value;
-		}
-
-		$key       = AUTH_KEY;
-		$iv        = $parts[0];
-		$cipher    = $parts[1];
-		$decrypted = \openssl_decrypt( $cipher, 'aes-256-cbc', $key, 0, $iv );
-
-		return ( false !== $decrypted ) ? $decrypted : '';
-	}
-
-	/**
 	 * Check if the spotify client id and secret are set.
 	 *
 	 * @since    1.0.0
@@ -85,7 +29,7 @@ class Helper {
 	public static function check_pulseshareapi_keys_empty() {
 		$pulseshare_options      = get_option( 'pulseshare_options' );
 		$pulseshareclient_id     = $pulseshare_options['pulseshare_client_id'] ?? '';
-		$pulseshareclient_secret = self::decrypt( $pulseshare_options['pulseshare_client_secret'] ?? '' );
+		$pulseshareclient_secret = $pulseshare_options['pulseshare_client_secret'] ?? '';
 
 		return empty( $pulseshareclient_id ) || empty( $pulseshareclient_secret );
 	}
@@ -106,7 +50,7 @@ class Helper {
 
 		$pulseshare_options = get_option( 'pulseshare_options' );
 		$client_id          = $pulseshare_options['pulseshare_client_id'] ?? '';
-		$client_secret      = self::decrypt( $pulseshare_options['pulseshare_client_secret'] ?? '' );
+		$client_secret      = $pulseshare_options['pulseshare_client_secret'] ?? '';
 
 		if ( empty( $client_id ) || empty( $client_secret ) ) {
 			return '';

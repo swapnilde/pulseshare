@@ -9,8 +9,6 @@
 
 namespace PulseShare\Includes\Options;
 
-use PulseShare\Includes\Helper;
-
 // If this file is called directly, abort.
 if ( ! defined( 'WPINC' ) ) {
 	die;
@@ -216,11 +214,6 @@ class OptionsPanel {
 				$sanitize_callback = $args['sanitize_callback'] ?? $this->get_sanitize_callback_by_type( $field_type );
 				$sanitized_value   = call_user_func( $sanitize_callback, $new_option_value, $args );
 
-				// Encrypt password fields before storing.
-				if ( 'password' === $field_type && ! empty( $sanitized_value ) ) {
-					$sanitized_value = Helper::encrypt( $sanitized_value );
-				}
-
 				$new_value[ $key ] = $sanitized_value;
 			} elseif ( 'checkbox' === $field_type ) {
 				$new_value[ $key ] = 0;
@@ -391,8 +384,7 @@ class OptionsPanel {
 	 */
 	public function render_password_field( $args ) {
 		$option_name = $args['label_for'];
-		$raw_value   = $this->get_option_value( $option_name );
-		$value       = Helper::decrypt( $raw_value );
+		$value       = $this->get_option_value( $option_name );
 		$description = $this->settings[ $option_name ]['description'] ?? '';
 		?>
 		<input
